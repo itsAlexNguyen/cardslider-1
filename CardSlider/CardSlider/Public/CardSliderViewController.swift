@@ -136,7 +136,7 @@ open class CardSliderViewController: UIViewController, UIScrollViewDelegate {
 		}
 	}
 	
-	public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+	open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 		guard scrollView == collectionView else { return }
 		guard let layout = collectionView.collectionViewLayout as? CardsLayout else { return }
 		let item = dataSource.item(for: dataSource.numberOfItems() - layout.currentPage - 1)
@@ -243,17 +243,17 @@ extension CardSliderViewController: UICollectionViewDelegate, UICollectionViewDa
 		return dataSource.numberOfItems()
 	}
 	
-	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+	open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		return collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
 	}
 	
-	public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+	open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		guard let cell = cell as? CardSliderCell else { return }
 		let item = dataSource.item(for: dataSource.numberOfItems() - indexPath.item - 1)
 		cell.imageView.image = item.image
 	}
 	
-	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+	open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		collectionView.deselectItem(at: indexPath, animated: true)
 		if CGFloat(indexPath.item) != collectionView.contentOffset.x / collectionView.bounds.width {
 			collectionView.setContentOffset(CGPoint(x: collectionView.bounds.width * CGFloat(indexPath.item), y: 0), animated: true)
