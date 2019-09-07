@@ -29,6 +29,7 @@ public protocol CardSliderDataSource: class {
 
 public protocol CardSliderDelegate: class {
     func cardSlider(_ controller: CardSliderViewController, didSelectItemAt indexPath: IndexPath)
+    func cardSlider(_ controller: CardSliderViewController, didScrollToItemAt index: Int)
 }
 
 /// A view controller displaying a slider of cards, represented by CardSliderItems.
@@ -144,6 +145,7 @@ open class CardSliderViewController: UIViewController, UIScrollViewDelegate {
 		guard scrollView == collectionView else { return }
 		guard let layout = collectionView.collectionViewLayout as? CardsLayout else { return }
 		let item = dataSource.item(for: dataSource.numberOfItems() - layout.currentPage - 1)
+		delegate?.cardSlider(self, didScrollToItemAt: dataSource.numberOfItems() - layout.currentPage - 1)
 		cardTitleView.set(title: CardTitle(title: item.title, subtitle: item.subtitle))
 	}
 	
