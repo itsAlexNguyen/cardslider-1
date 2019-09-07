@@ -27,6 +27,10 @@ public protocol CardSliderDataSource: class {
 	func numberOfItems() -> Int
 }
 
+public protocol CardSliderDelegate: class {
+    func cardSlider(_ controller: CardSliderViewController, didSelectItemAt indexPath: IndexPath)
+}
+
 /// A view controller displaying a slider of cards, represented by CardSliderItems.
 ///
 /// Needs CardSliderDataSource to show data.
@@ -47,7 +51,7 @@ open class CardSliderViewController: UIViewController, UIScrollViewDelegate {
 	private weak var openCardCell: UICollectionViewCell?
 	private var animator: UIViewPropertyAnimator?
 	private let cellID = "CardCell"
-	
+	public weak var delegate: CardSliderDelegate?
 	
 	/// Instantiate CardSliderViewController.
 	///
@@ -259,7 +263,7 @@ extension CardSliderViewController: UICollectionViewDelegate, UICollectionViewDa
 			collectionView.setContentOffset(CGPoint(x: collectionView.bounds.width * CGFloat(indexPath.item), y: 0), animated: true)
 			return
 		}
-		
+		delegate?.cardSlider(self, didSelectItemAt: indexPath)
 		showCardDescription(for: indexPath)
 	}
 }
