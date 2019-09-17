@@ -50,7 +50,7 @@ open class CardSliderViewController: UIViewController, UIScrollViewDelegate {
 	private weak var cardSnapshot: UIView?
 	private weak var cardTitleSnapshot: UIView?
 	private weak var openCardCell: UICollectionViewCell?
-	private var animator: UIViewPropertyAnimator?
+	public var animator: UIViewPropertyAnimator?
 	private let cellID = "CardCell"
 	public weak var delegate: CardSliderDelegate?
 	
